@@ -12,15 +12,16 @@
     }
 
     :root {
-      --paper: #f3f6f1;
-      --ink: #1e3d36;
-      --sage: #5c8f7a;
-      --sage-d: #3e6b5c;
-      --mint: #e7f2ec;
-      --foam: #b7d4c7;
-      --coral: #c45c4e;
-      --cream: #fffcf7;
-      --mute: #6f857c;
+      --paper: #eef4ef;
+      --ink: #16352d;
+      --sage: #3f8a6e;
+      --sage-d: #246b52;
+      --mint: #d7eee3;
+      --foam: #7ec8a8;
+      --coral: #d94b3d;
+      --cream: #fffdf8;
+      --mute: #4d6b60;
+      --line: #2f6b55;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,7 +38,7 @@
       position: relative;
       font-family: "Noto Sans SC", "WenQuanYi Micro Hei", sans-serif;
       color: var(--ink);
-      background: linear-gradient(180deg, #f7faf6 0%, #eef4ef 55%, #e6f0ea 100%);
+      background: linear-gradient(180deg, #eaf3ee 0%, #e3efe8 55%, #d7e9df 100%);
     }
 
     .header {
@@ -63,8 +64,9 @@
 
     .badge {
       display: inline-block;
-      background: #eef6f1;
+      background: #fff;
       color: var(--sage-d);
+      border: 1.5px solid var(--sage);
       font-size: 22px;
       font-weight: 800;
       padding: 8px 22px;
@@ -85,7 +87,7 @@
     .ribbon {
       display: inline-block;
       margin-top: 16px;
-      background: var(--sage);
+      background: var(--sage-d);
       color: #fff;
       font-size: 24px;
       font-weight: 700;
@@ -111,7 +113,7 @@
       margin: -28px 40px 0;
       min-height: 108px;
       border-radius: 18px;
-      border: 1.5px solid #cfe0d6;
+      border: 2px solid var(--sage);
       background: var(--cream);
       display: flex;
       align-items: center;
@@ -168,21 +170,21 @@
     }
 
     .hi-a {
-      background: #e8f4ee;
-      border-color: #c5dfd1;
-      color: #2f5c4d;
+      background: linear-gradient(135deg, #3f8a6e, #246b52);
+      border-color: #1f5a44;
+      color: #fff;
     }
     .hi-b {
-      background: #e7f4f5;
-      border-color: #c3dde0;
-      color: #2d5f66;
+      background: linear-gradient(135deg, #3b8e99, #226870);
+      border-color: #1d575e;
+      color: #fff;
     }
 
     .hi .eye {
       font-size: 16px;
       font-weight: 700;
       letter-spacing: 3px;
-      opacity: .75;
+      opacity: .9;
     }
 
     .hi .big {
@@ -197,7 +199,7 @@
       margin-top: 8px;
       font-size: 18px;
       font-weight: 600;
-      opacity: .82;
+      opacity: .95;
     }
 
     .stats {
@@ -226,7 +228,7 @@
 
     .card {
       background: var(--cream);
-      border: 1.5px solid #d5e5db;
+      border: 2px solid var(--sage);
       border-radius: 16px;
       text-align: center;
       padding: 14px 10px 12px;
@@ -237,7 +239,7 @@
     .card .v { margin-top: 4px; font-size: 36px; font-weight: 900; color: var(--ink); }
     .card .u { margin-top: 2px; font-size: 17px; font-weight: 600; color: var(--mute); }
     .card .h { margin-top: 6px; font-size: 15px; color: #8aa297; }
-    .card.hot { background: #fff6f3; border-color: #edc8c2; }
+    .card.hot { background: #fff4f1; border-color: var(--coral); }
     .card.hot .v { color: var(--coral); }
 
     .flag {
@@ -263,9 +265,12 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      overflow: hidden;
-      border-radius: 12px;
       background: #fff;
+      border: 3px solid #16352d;
+    }
+
+    th, td {
+      border: 2.5px solid #16352d;
     }
 
     th {
@@ -282,14 +287,14 @@
       font-weight: 700;
       padding: 13px 4px;
       color: var(--ink);
-      border-bottom: 1px solid #e6eee9;
+      background: #fff;
     }
 
-    tr:nth-child(even) td { background: var(--mint); }
+    tr:nth-child(even) td { background: #d7eee3; }
     tr:last-child td {
       color: var(--sage-d);
-      background: #dceee4;
-      border-bottom: none;
+      background: #c5e4d4;
+      font-weight: 900;
     }
 
     .side {
@@ -320,8 +325,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #eef6f1;
-      border: 1.5px solid var(--sage);
+      background: #dff0e7;
+      border: 2px solid var(--sage-d);
       color: var(--sage-d);
       font-size: 17px;
       font-weight: 800;
