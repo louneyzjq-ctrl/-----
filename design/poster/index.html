@@ -2,54 +2,35 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=1080" />
-  <title>智X储蓄保 · 森金限定海报</title>
+  <title>智X储蓄保</title>
   <style>
     @font-face {
       font-family: "Noto Sans SC";
-      src: local("Noto Sans SC"), local("WenQuanYi Micro Hei");
+      src: url("./fonts/NotoSansSC-Variable.ttf") format("truetype");
       font-weight: 100 900;
       font-display: block;
-    }
-
-    :root {
-      --teal-950: #062824;
-      --teal-900: #0A3B36;
-      --teal-800: #0E4F48;
-      --teal-700: #14675E;
-      --gold: #C9A227;
-      --gold-bright: #E0C15A;
-      --gold-deep: #A8841A;
-      --cream: #FFF8EC;
-      --cream-2: #F6EBD3;
-      --paper: #FBF6EA;
-      --terra: #B45309;
-      --terra-deep: #9A3412;
-      --olive: #4D7C0F;
-      --ink: #14332F;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      width: 1080px;
-      background: #0a2a26;
+      width: 1920px;
+      background: #0c1b3a;
     }
 
     .poster {
-      width: 1080px;
-      height: 1920px;
-      background: linear-gradient(180deg, #FBF7EC 0%, #F3EBDA 100%);
+      width: 1920px;
+      height: 1200px;
+      background: #f4f7fb;
       font-family: "Noto Sans SC", "WenQuanYi Micro Hei", sans-serif;
-      color: var(--ink);
+      color: #10243f;
       overflow: hidden;
       position: relative;
     }
 
-    /* ===== Header ===== */
     .header {
+      height: 460px;
       position: relative;
-      height: 600px;
       overflow: hidden;
     }
 
@@ -57,346 +38,265 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, rgba(6, 40, 36, 0.90) 0%, rgba(6, 40, 36, 0.58) 38%, rgba(6, 40, 36, 0.16) 68%, rgba(10, 59, 54, 0.05) 100%),
-        linear-gradient(180deg, rgba(6, 40, 36, 0.08) 0%, rgba(6, 40, 36, 0.42) 100%),
-        url("./assets/header-family-autumn.jpg") 72% 38% / cover no-repeat;
+        linear-gradient(90deg, rgba(12, 27, 58, 0.78) 0%, rgba(12, 27, 58, 0.28) 36%, rgba(12, 27, 58, 0.04) 62%, rgba(12, 27, 58, 0) 100%),
+        linear-gradient(180deg, rgba(12, 27, 58, 0) 70%, rgba(244, 247, 251, 0.35) 100%),
+        url("./assets/header-family-hydrangea.jpg") 64% 18% / cover no-repeat;
     }
 
     .header-inner {
       position: relative;
       z-index: 2;
       height: 100%;
-      padding: 48px 48px 36px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      padding: 54px 56px 0;
     }
 
     .badge {
-      align-self: flex-start;
-      background: linear-gradient(90deg, #E0C15A, #C9A227);
-      color: #3A2E0A;
-      font-weight: 700;
+      display: inline-block;
+      background: #f5c400;
+      color: #1b2c4a;
       font-size: 22px;
-      letter-spacing: 1px;
-      padding: 8px 22px;
+      font-weight: 800;
+      padding: 7px 20px;
       border-radius: 999px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+      letter-spacing: 0.5px;
     }
 
-    .title {
-      margin-top: 22px;
+    h1 {
+      margin-top: 18px;
       color: #fff;
-      font-size: 92px;
+      font-size: 86px;
       font-weight: 900;
-      letter-spacing: 6px;
-      line-height: 1.05;
-      text-shadow: 0 6px 0 rgba(10, 59, 54, 0.35), 0 10px 24px rgba(0, 0, 0, 0.28);
+      letter-spacing: 4px;
+      line-height: 1;
+      text-shadow: 2px 4px 0 rgba(16, 42, 96, 0.45);
     }
 
-    .title span.x {
-      color: var(--gold-bright);
-      padding: 0 4px;
-    }
+    h1 .x { color: #f5c400; }
 
     .ribbon {
-      margin-top: 22px;
-      align-self: flex-start;
-      background: linear-gradient(90deg, #0E4F48, #14675E);
+      display: inline-block;
+      margin-top: 20px;
+      background: #163a86;
       color: #fff;
       font-size: 26px;
       font-weight: 700;
-      letter-spacing: 1.5px;
-      padding: 12px 28px 12px 24px;
-      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+      padding: 10px 28px 10px 22px;
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%);
     }
 
     .gift {
       position: absolute;
-      right: 8px;
-      top: 18px;
+      right: 20px;
+      top: 24px;
+      height: 420px;
       width: auto;
-      height: 470px;
-      object-fit: contain;
       z-index: 3;
-      filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.32));
+      filter: drop-shadow(0 14px 18px rgba(8, 18, 40, 0.35));
       pointer-events: none;
     }
 
-    /* ===== Discount ===== */
     .discount {
-      margin: -28px 40px 0;
+      margin: -28px 48px 0;
       position: relative;
       z-index: 4;
-      background: #fff;
-      border: 3px solid #C9A227;
-      border-radius: 22px;
-      min-height: 118px;
+      height: 96px;
+      background: #fff8e8;
+      border: 2px solid #f0b429;
+      border-radius: 16px;
       display: flex;
       align-items: center;
-      padding: 18px 28px;
+      padding: 0 28px;
       gap: 22px;
-      box-shadow: 0 12px 28px rgba(20, 51, 47, 0.12);
     }
 
     .discount-tag {
-      background: linear-gradient(180deg, #C2410C, #9A3412);
+      background: #e10600;
       color: #fff;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 800;
-      padding: 14px 22px;
+      padding: 10px 22px;
       border-radius: 999px;
       white-space: nowrap;
-      box-shadow: 0 6px 14px rgba(154, 52, 18, 0.28);
     }
 
     .discount-copy {
-      font-size: 30px;
-      font-weight: 700;
-      color: var(--teal-900);
-      line-height: 1.35;
+      font-size: 32px;
+      font-weight: 800;
+      color: #163a86;
     }
 
-    .discount-copy .pct {
-      color: var(--terra);
+    .discount-copy b {
+      color: #e10600;
       font-size: 58px;
-      font-weight: 900;
-      padding: 0 4px;
-      letter-spacing: -1px;
-      vertical-align: -6px;
+      padding: 0 6px;
+      vertical-align: -8px;
     }
 
-    .discount-copy .sub {
-      display: block;
-      margin-top: 2px;
-      font-size: 20px;
-      font-weight: 500;
-      color: #5B6E6A;
+    .discount-copy span {
+      font-size: 22px;
+      font-weight: 600;
+      color: #5b6d86;
+      margin-left: 10px;
     }
 
-    /* ===== Stats ===== */
-    .stats {
-      margin: 28px 40px 0;
+    .body {
       display: grid;
-      grid-template-columns: 1.15fr 1fr 1.15fr;
-      gap: 16px;
-      align-items: stretch;
+      grid-template-columns: 760px 1fr;
+      gap: 28px;
+      padding: 22px 48px 0;
     }
 
-    .stat-yield {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 8px 6px 8px 4px;
+    .yield-line {
+      font-size: 28px;
+      font-weight: 800;
+      color: #163a86;
     }
 
-    .stat-yield .label {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--teal-800);
-      line-height: 1.4;
-    }
-
-    .stat-yield .num {
-      margin-top: 6px;
-      color: var(--terra);
-      font-size: 84px;
-      font-weight: 900;
-      letter-spacing: -2px;
+    .yield-line b {
+      display: inline-block;
+      color: #e10600;
+      font-size: 72px;
       line-height: 1;
+      margin-left: 8px;
+      vertical-align: -8px;
+    }
+
+    .pair {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
 
     .card {
       background: #fff;
-      border-radius: 20px;
-      border: 2px solid #E4D7B6;
-      padding: 18px 16px 16px;
+      border: 1px solid #d7e0ee;
+      border-radius: 14px;
+      padding: 14px 12px 12px;
       text-align: center;
-      box-shadow: 0 8px 18px rgba(20, 51, 47, 0.06);
       position: relative;
     }
 
-    .card .k {
-      font-size: 20px;
-      font-weight: 700;
-      color: #5B6E6A;
-    }
-
-    .card .v {
-      margin-top: 6px;
-      font-size: 44px;
-      font-weight: 900;
-      color: var(--teal-900);
-      letter-spacing: -1px;
-      line-height: 1.1;
-    }
-
-    .card .u {
-      margin-top: 4px;
-      font-size: 20px;
-      font-weight: 600;
-      color: #5B6E6A;
-    }
-
-    .card .hint {
-      margin-top: 8px;
-      font-size: 18px;
-      color: #7A8B87;
-    }
+    .card .k { font-size: 18px; font-weight: 700; color: #5b6d86; }
+    .card .v { margin-top: 4px; font-size: 42px; font-weight: 900; color: #163a86; line-height: 1.1; }
+    .card .u { margin-top: 2px; font-size: 18px; color: #5b6d86; font-weight: 600; }
+    .card .h { margin-top: 6px; font-size: 16px; color: #8a97ab; }
 
     .card.hot {
-      border-color: #E8B86D;
-      background: linear-gradient(180deg, #FFFDF7, #FFF4DC);
+      background: #fff5f4;
+      border-color: #f3b4b0;
     }
-
-    .card.hot .v { color: var(--terra); }
+    .card.hot .v { color: #e10600; }
 
     .flag {
       position: absolute;
-      top: -2px;
-      right: -2px;
-      background: var(--terra);
+      top: 0;
+      right: 0;
+      background: #e10600;
       color: #fff;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 800;
-      padding: 6px 12px;
-      border-radius: 0 18px 0 14px;
-    }
-
-    /* ===== Bottom panel ===== */
-    .bottom {
-      margin: 32px 40px 0;
-      display: grid;
-      grid-template-columns: 1.55fr 1fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      overflow: hidden;
-      border-radius: 16px;
-      box-shadow: 0 10px 22px rgba(20, 51, 47, 0.08);
-      background: #fff;
-    }
-
-    thead th {
-      background: linear-gradient(90deg, #0A3B36, #14675E);
-      color: #fff;
-      font-size: 20px;
-      font-weight: 700;
-      padding: 18px 8px;
-      text-align: center;
-    }
-
-    tbody td {
-      text-align: center;
-      padding: 18px 6px;
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--ink);
-      border-bottom: 1px solid #EFE6D2;
-    }
-
-    tbody tr:nth-child(even) { background: #F3F8F5; }
-    tbody tr:nth-child(odd) { background: #fff; }
-    tbody tr:last-child td {
-      font-weight: 800;
-      color: var(--teal-900);
-      background: #E7F2EE;
-      border-bottom: none;
-    }
-
-    .side {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 4px 0 0;
-      min-height: 100%;
+      padding: 5px 10px;
+      border-radius: 0 13px 0 10px;
     }
 
     .pills {
+      margin-top: 18px;
       display: flex;
       gap: 10px;
     }
 
     .pill {
-      background: linear-gradient(180deg, #0E4F48, #0A3B36);
-      color: #F6EBD3;
-      font-size: 24px;
+      background: #163a86;
+      color: #fff;
+      font-size: 22px;
       font-weight: 800;
-      padding: 10px 22px;
+      padding: 8px 22px;
       border-radius: 999px;
-      border: 1.5px solid var(--gold);
-      letter-spacing: 1px;
     }
 
     .mature {
+      margin-top: 16px;
       font-size: 26px;
-      font-weight: 700;
-      color: var(--teal-800);
-      line-height: 1.35;
+      font-weight: 800;
+      color: #163a86;
     }
 
-    .mature .num {
-      display: block;
-      margin-top: 4px;
-      color: var(--terra);
-      font-size: 64px;
-      font-weight: 900;
-      letter-spacing: -1px;
-      line-height: 1.05;
+    .mature b {
+      color: #e10600;
+      font-size: 56px;
+      margin-left: 6px;
+      vertical-align: -6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th {
+      background: #163a86;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 12px 6px;
+    }
+
+    td {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 11px 6px;
+      border-bottom: 1px solid #e6edf6;
+    }
+
+    tr:nth-child(even) td { background: #eef3fb; }
+    tr:last-child td {
+      background: #dce7f8;
+      color: #163a86;
+      border-bottom: none;
+    }
+
+    .footer {
+      position: absolute;
+      left: 48px;
+      right: 48px;
+      bottom: 28px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .period {
-      margin-top: 8px;
       display: flex;
       align-items: center;
       gap: 10px;
-      background: #E8F3C8;
-      border: 2px solid #84A83A;
-      color: #3F6212;
+      background: #d9f6ee;
+      border: 2px solid #1aa37a;
+      color: #0d6a4f;
       font-size: 22px;
       font-weight: 800;
-      padding: 12px 16px;
+      padding: 8px 18px;
       border-radius: 999px;
     }
 
-    .clock {
-      width: 28px;
-      height: 28px;
-      flex: 0 0 28px;
-    }
+    .clock { width: 24px; height: 24px; }
 
-    .note {
-      margin: 28px 48px 0;
-      font-size: 15px;
-      color: #7A8B87;
-      line-height: 1.55;
-    }
-
-    .footer-bar {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 16px;
-      background: linear-gradient(90deg, #0A3B36, #C9A227, #0A3B36);
-    }
+    .note { font-size: 14px; color: #8a97ab; }
   </style>
 </head>
 <body>
   <article class="poster">
     <header class="header">
       <div class="header-photo"></div>
-      <img class="gift" src="./assets/gift-box-gold-teal.png" alt="" />
+      <img class="gift" src="./assets/gift-box-navy.png" alt="" />
       <div class="header-inner">
         <div class="badge">立Q人寿智选高息</div>
-        <h1 class="title">智 <span class="x">X</span> 储蓄保</h1>
+        <h1>智 <span class="x">X</span> 储蓄保</h1>
         <div class="ribbon">中长期财富保障 保证回报市场领先!</div>
       </div>
     </header>
@@ -404,31 +304,35 @@
     <section class="discount">
       <div class="discount-tag">限时折扣</div>
       <div class="discount-copy">
-        限时享 <span class="pct">7%</span> 保费折扣
-        <span class="sub">（整付保费 25 万美元起）</span>
+        限时享 <b>7%</b> 保费折扣
+        <span>（整付保费 25 万美元起）</span>
       </div>
     </section>
 
-    <section class="stats">
-      <div class="stat-yield">
-        <div class="label">第5年末保证年化收益率</div>
-        <div class="num">5.01%</div>
+    <section class="body">
+      <div>
+        <div class="yield-line">第5年末保证年化收益率 <b>5.01%</b></div>
+        <div class="pair">
+          <div class="card">
+            <div class="k">整付保费</div>
+            <div class="v">250,000</div>
+            <div class="u">美元保费</div>
+            <div class="h">（20年保障期）</div>
+          </div>
+          <div class="card hot">
+            <div class="flag">折扣后</div>
+            <div class="k">实际投入金额为</div>
+            <div class="v">232,500</div>
+            <div class="u">美元保费</div>
+          </div>
+        </div>
+        <div class="pills">
+          <span class="pill">回本快</span>
+          <span class="pill">收益高</span>
+        </div>
+        <div class="mature">期满潜在收益高达 <b>5.28%!</b></div>
       </div>
-      <div class="card">
-        <div class="k">整付保费</div>
-        <div class="v">250,000</div>
-        <div class="u">美元保费</div>
-        <div class="hint">（20年保障期）</div>
-      </div>
-      <div class="card hot">
-        <div class="flag">折扣后</div>
-        <div class="k">实际投入金额为</div>
-        <div class="v">232,500</div>
-        <div class="u">美元保费</div>
-      </div>
-    </section>
 
-    <section class="bottom">
       <table>
         <thead>
           <tr>
@@ -440,65 +344,25 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>232,500</td>
-            <td>225,525</td>
-            <td>-3.00%</td>
-            <td>-3.00%</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>0</td>
-            <td>241,800</td>
-            <td>2.00%</td>
-            <td>1.98%</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>0</td>
-            <td>258,075</td>
-            <td>3.67%</td>
-            <td>3.54%</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>0</td>
-            <td>274,350</td>
-            <td>4.50%</td>
-            <td>4.23%</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>0</td>
-            <td>290,741</td>
-            <td>5.01%</td>
-            <td>4.57%</td>
-          </tr>
+          <tr><td>1</td><td>232,500</td><td>225,525</td><td>-3.00%</td><td>-3.00%</td></tr>
+          <tr><td>2</td><td>0</td><td>241,800</td><td>2.00%</td><td>1.98%</td></tr>
+          <tr><td>3</td><td>0</td><td>258,075</td><td>3.67%</td><td>3.54%</td></tr>
+          <tr><td>4</td><td>0</td><td>274,350</td><td>4.50%</td><td>4.23%</td></tr>
+          <tr><td>5</td><td>0</td><td>290,741</td><td>5.01%</td><td>4.57%</td></tr>
         </tbody>
       </table>
-
-      <div class="side">
-        <div class="pills">
-          <span class="pill">回本快</span>
-          <span class="pill">收益高</span>
-        </div>
-        <div class="mature">
-          期满潜在收益高达
-          <span class="num">5.28%!</span>
-        </div>
-        <div class="period">
-          <svg class="clock" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" stroke="#4D7C0F" stroke-width="2.2"/>
-            <path d="M12 7v5.2l3.2 1.8" stroke="#4D7C0F" stroke-width="2.2" stroke-linecap="round"/>
-          </svg>
-          推广期 2026年7月1日-8月31日
-        </div>
-      </div>
     </section>
 
-    <p class="note">演示海报：版式参照原物料，配色改为森绿 × 香槟金。数据仅用于视觉还原，不构成任何产品要约或收益承诺。</p>
-    <div class="footer-bar"></div>
+    <footer class="footer">
+      <div class="period">
+        <svg class="clock" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="#1aa37a" stroke-width="2.2"/>
+          <path d="M12 7v5.2l3.2 1.8" stroke="#1aa37a" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        推广期 2026年7月1日-8月31日
+      </div>
+      <p class="note">版式参照原物料，配色改为墨蓝 × 金黄 × 正红。数据仅作视觉还原。</p>
+    </footer>
   </article>
 </body>
 </html>
