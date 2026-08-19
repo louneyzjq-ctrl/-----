@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>智X储蓄保</title>
+  <title>友邦保险 · 环宇盈活</title>
   <style>
     @font-face {
       font-family: "Noto Sans SC";
@@ -38,7 +38,7 @@
     .skyline {
       position: absolute;
       left: 0; right: 0; bottom: 0;
-      height: 380px;
+      height: 200px;
       background:
         linear-gradient(180deg, rgba(7,20,40,.25) 0%, rgba(7,20,40,0) 18%, rgba(7,20,40,.45) 100%),
         url("./assets/skyline-gold-trails.jpg") center bottom / cover no-repeat;
@@ -50,10 +50,19 @@
       position: relative;
       z-index: 2;
       height: 100%;
-      padding: 42px 48px 12px;
+      padding: 32px 48px 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    .brand {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 8px;
+      color: var(--gold-2);
+      margin-bottom: 10px;
+      text-shadow: 0 0 12px rgba(212,175,55,.35);
     }
 
     .hex {
@@ -131,49 +140,9 @@
     .panel::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
     .panel::after { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }
 
-    .discount {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      border: 1px solid rgba(212,175,55,.55);
-      background: rgba(7,16,36,.35);
-      padding: 14px 18px;
-      margin-bottom: 16px;
-    }
-
-    .discount .ttl {
-      color: var(--gold-2);
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 3px;
-      white-space: nowrap;
-    }
-
-    .discount .copy {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--ivory);
-      letter-spacing: 1px;
-    }
-
-    .discount b {
-      color: var(--gold-2);
-      font-size: 28px;
-      margin: 0 4px;
-    }
-
-    .discount small {
-      display: block;
-      margin-top: 4px;
-      font-size: 14px;
-      color: var(--mute);
-      font-weight: 600;
-    }
-
     .stats {
       display: grid;
-      grid-template-columns: 1.15fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 12px;
     }
 
@@ -181,7 +150,6 @@
       border: 1px solid rgba(212,175,55,.4);
       padding: 16px 14px 14px;
       background: rgba(7,16,36,.35);
-      min-height: 148px;
     }
 
     .stat .k {
@@ -192,38 +160,21 @@
     }
 
     .stat .v {
-      margin-top: 10px;
+      margin-top: 8px;
       color: var(--gold-2);
-      font-size: 42px;
+      font-size: 32px;
       font-weight: 900;
       letter-spacing: 1px;
       text-shadow: 0 0 12px rgba(212,175,55,.35);
-      line-height: 1.1;
-    }
-
-    .stat .u {
-      margin-top: 8px;
-      font-size: 15px;
-      color: var(--ivory);
-      font-weight: 700;
+      line-height: 1.15;
     }
 
     .stat .h {
-      margin-top: 4px;
-      font-size: 13px;
-      color: var(--mute);
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--ivory);
       font-weight: 600;
-    }
-
-    .stat.hot .flag {
-      display: inline-block;
-      border: 1px solid var(--gold);
-      color: var(--gold-2);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      padding: 2px 8px;
-      margin-bottom: 8px;
+      line-height: 1.45;
     }
 
     table {
@@ -248,7 +199,7 @@
     td {
       font-size: 16px;
       font-weight: 700;
-      padding: 12px 4px;
+      padding: 8px 4px;
       color: var(--ivory);
     }
 
@@ -257,9 +208,32 @@
       font-weight: 900;
     }
 
+    .cond-wrap { width: 100%; margin-top: 12px; }
+
+    .cond-title {
+      display: inline-flex;
+      color: var(--gold-2);
+      border: 1.5px solid var(--gold);
+      padding: 6px 22px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%);
+      margin-bottom: 12px;
+    }
+
+    .cond {
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.7;
+      color: var(--ivory);
+    }
+
+    .cond b { color: var(--gold-2); }
+
     .foot {
       width: 100%;
-      margin-top: 18px;
+      margin-top: 10px;
       padding-top: 6px;
       display: flex;
       align-items: flex-end;
@@ -286,16 +260,17 @@
       white-space: nowrap;
     }
 
-    .note { width: 100%; margin-top: 8px; font-size: 13px; color: #8e866f; line-height: 1.5; }
+    .note { width: 100%; margin-top: 6px; font-size: 13px; color: #8e866f; line-height: 1.5; }
   </style>
 </head>
 <body>
   <article class="poster">
     <div class="skyline"></div>
     <div class="content">
-      <div class="hex">立Q人寿　智选高息</div>
-      <h1>智X储蓄保</h1>
-      <div class="sub">中长期财富保障　|　保证回报市场领先</div>
+      <div class="brand">友邦保险</div>
+      <div class="hex">可抵保费　高达 33%</div>
+      <h1>环宇盈活</h1>
+      <div class="sub">财富盈活同步适用　|　首年保费回赠</div>
       <div class="hairline"></div>
       <div class="pills">
         <span class="pill">回本快</span>
@@ -303,59 +278,59 @@
       </div>
 
       <section class="panel">
-        <div class="discount">
-          <div class="ttl">限时折扣</div>
-          <div class="copy">
-            限时享 <b>7%</b> 保费折扣
-            <small>整付保费 250,000 美元起　·　20 年保障期</small>
-          </div>
-        </div>
-
         <div class="stats">
           <div class="stat">
-            <div class="k">第5年末保证年化收益率</div>
-            <div class="v">5.01%</div>
-            <div class="h">保证收益稳步回升，回本节奏更清晰</div>
+            <div class="k">方案一　年化 50,000</div>
+            <div class="v">23%</div>
+            <div class="h">基础回赠 11,500 美元<br>升级 26% = 13,000 美元</div>
           </div>
           <div class="stat">
-            <div class="k">整付保费</div>
-            <div class="v">250,000</div>
-            <div class="u">美元保费</div>
-            <div class="h">20 年保障期</div>
+            <div class="k">方案二　年化 100,000</div>
+            <div class="v">26%</div>
+            <div class="h">基础回赠 26,000 美元<br>升级 29% = 29,000 美元</div>
           </div>
-          <div class="stat hot">
-            <div class="flag">折扣后</div>
-            <div class="k">实际投入金额</div>
-            <div class="v">232,500</div>
-            <div class="u">美元保费</div>
+          <div class="stat">
+            <div class="k">总优惠最高</div>
+            <div class="v">33%</div>
+            <div class="h">财富盈活门槛限时<br>由 10 万下调至 5 万</div>
           </div>
         </div>
 
         <table>
           <thead>
             <tr>
-              <th>年度</th>
-              <th>投入金额</th>
-              <th>保证收益</th>
-              <th>保证单利</th>
-              <th>保证复利</th>
+              <th>年化保费（美元）</th>
+              <th>基本优惠</th>
+              <th>额外优惠*</th>
+              <th>总优惠最高</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>1</td><td>232,500</td><td>225,525</td><td>-3.00%</td><td>-3.00%</td></tr>
-            <tr><td>2</td><td>0</td><td>241,800</td><td>2.00%</td><td>1.98%</td></tr>
-            <tr><td>3</td><td>0</td><td>258,075</td><td>3.67%</td><td>3.54%</td></tr>
-            <tr><td>4</td><td>0</td><td>274,350</td><td>4.50%</td><td>4.23%</td></tr>
-            <tr><td>5</td><td>0</td><td>290,741</td><td>5.01%</td><td>4.57%</td></tr>
+            <tr><td>低于 10,000</td><td>5%</td><td>+3%</td><td>8%</td></tr>
+            <tr><td>10,000－不足 30,000</td><td>13%</td><td>+3%</td><td>16%</td></tr>
+            <tr><td>30,000－不足 50,000</td><td>19%</td><td>+3%</td><td>22%</td></tr>
+            <tr><td>50,000－不足 100,000</td><td>23%</td><td>+3%</td><td>26%</td></tr>
+            <tr><td>100,000－不足 200,000</td><td>26%</td><td>+3%</td><td>29%</td></tr>
+            <tr><td>200,000－不足 1,000,000</td><td>28%</td><td>+3%</td><td>31%</td></tr>
+            <tr><td>1,000,000 或以上</td><td>30%</td><td>+3%</td><td>33%</td></tr>
           </tbody>
         </table>
       </section>
 
+      <div class="cond-wrap">
+        <div class="cond-title">升级回赠条件</div>
+        <div class="cond">
+          同一投保人于推广期内成功投保指定搭配计划：<br>
+          <b>1.</b> 指定危疾「爱伴航」保险计划2系列，原保额不少于 <b>50,000 美元</b>；<br>
+          <b>2.</b> 或指定人寿「活然人生」保险计划，年化保费不少于 <b>3,000 美元</b>。
+        </div>
+      </div>
+
       <footer class="foot">
-        <div class="foot-hl">期满潜在收益高达 5.28%</div>
+        <div class="foot-hl">友邦可弹性给到最高 33% 回赠</div>
         <div class="period">推广期 2026年7月1日-8月31日</div>
       </footer>
-      <p class="note">保证收益与潜在收益不同，潜在收益并不保证。数据为方案示意，详情以计划书及核保结果为准。</p>
+      <p class="note">环宇盈活适用上表全档；财富盈活适用 5 万美元起档。回赠为保费优惠，不等于保证收益率。指定危疾仅「爱伴航」保险计划2系列。详情以计划书及核保结果为准。</p>
     </div>
   </article>
 </body>
