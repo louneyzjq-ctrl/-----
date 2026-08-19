@@ -33,12 +33,26 @@
 
     .poster {
       width: 1080px;
-      height: 1820px;
+      height: 1868px;
       overflow: hidden;
       position: relative;
       font-family: "Noto Sans SC", "WenQuanYi Micro Hei", sans-serif;
       color: var(--ink);
       background: linear-gradient(180deg, #eaf3ee 0%, #e3efe8 55%, #d7e9df 100%);
+    }
+
+    .topbar {
+      height: 48px;
+      background: var(--coral);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 5;
     }
 
     .header {
@@ -368,11 +382,12 @@
 </head>
 <body>
   <article class="poster">
+    <div class="topbar">推广期 2026年7月1日－2026年8月31日</div>
     <header class="header">
       <div class="header-photo"></div>
       <img class="gift" src="./assets/gift-box.png" alt="" />
       <div class="header-inner">
-        <div class="badge">限时推广 7月1日-8月31日</div>
+        <div class="badge">环宇盈活 / 财富盈活储蓄保险计划</div>
         <h1>高达33%回赠</h1>
         <div class="ribbon"><span>5年缴费　财富增值 / 人寿保障</span></div>
       </div>
