@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>智X储蓄保</title>
+  <style>
+    @font-face {
+      font-family: "Noto Sans SC";
+      src: url("./fonts/NotoSansSC-Variable.ttf") format("truetype");
+      font-weight: 100 900;
+      font-display: block;
+    }
+
+    :root {
+      --navy: #071428;
+      --gold: #d4af37;
+      --gold-2: #f1d27a;
+      --ivory: #f6f1e4;
+      --mute: #c5bda8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { width: 1080px; background: var(--navy); }
+
+    .poster {
+      width: 1080px;
+      height: 1460px;
+      position: relative;
+      overflow: hidden;
+      font-family: "Noto Sans SC", "WenQuanYi Micro Hei", sans-serif;
+      color: var(--ivory);
+      background:
+        linear-gradient(180deg, rgba(7,20,40,.25) 0%, rgba(7,20,40,.55) 42%, rgba(7,20,40,.2) 100%),
+        url("./assets/navy-gold-glow.jpg") center top / cover no-repeat;
+    }
+
+    .skyline {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 380px;
+      background:
+        linear-gradient(180deg, rgba(7,20,40,.25) 0%, rgba(7,20,40,0) 18%, rgba(7,20,40,.45) 100%),
+        url("./assets/skyline-gold-trails.jpg") center bottom / cover no-repeat;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      padding: 42px 48px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hex {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 260px;
+      padding: 8px 32px;
+      color: var(--gold-2);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border: 1.5px solid var(--gold);
+      background: rgba(8,22,48,.45);
+      clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
+      text-shadow: 0 0 12px rgba(212,175,55,.35);
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: 8px;
+      color: var(--gold-2);
+      line-height: 1;
+      text-shadow: 0 0 22px rgba(212,175,55,.45);
+    }
+
+    .sub {
+      margin-top: 14px;
+      font-size: 20px;
+      color: var(--mute);
+      letter-spacing: 3px;
+      font-weight: 500;
+    }
+
+    .hairline {
+      width: 520px;
+      height: 1px;
+      margin: 16px 0 18px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      box-shadow: 0 0 10px rgba(212,175,55,.45);
+    }
+
+    .pills {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      border: 1px solid var(--gold);
+      color: var(--gold-2);
+      font-size: 22px;
+      font-weight: 800;
+      padding: 7px 22px;
+      letter-spacing: 3px;
+    }
+
+    .panel {
+      width: 100%;
+      border: 1.5px solid rgba(212,175,55,.85);
+      box-shadow: 0 0 0 1px rgba(241,210,122,.12) inset, 0 0 24px rgba(212,175,55,.12);
+      background: linear-gradient(180deg, rgba(10,26,54,.72), rgba(8,18,40,.52));
+      padding: 22px 22px 18px;
+      position: relative;
+    }
+
+    .panel::before, .panel::after {
+      content: "";
+      position: absolute;
+      width: 16px; height: 16px;
+      border: 1.5px solid var(--gold);
+    }
+    .panel::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+    .panel::after { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }
+
+    .discount {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1px solid rgba(212,175,55,.55);
+      background: rgba(7,16,36,.35);
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+
+    .discount .ttl {
+      color: var(--gold-2);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      white-space: nowrap;
+    }
+
+    .discount .copy {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ivory);
+      letter-spacing: 1px;
+    }
+
+    .discount b {
+      color: var(--gold-2);
+      font-size: 28px;
+      margin: 0 4px;
+    }
+
+    .discount small {
+      display: block;
+      margin-top: 4px;
+      font-size: 14px;
+      color: var(--mute);
+      font-weight: 600;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat {
+      border: 1px solid rgba(212,175,55,.4);
+      padding: 16px 14px 14px;
+      background: rgba(7,16,36,.35);
+      min-height: 148px;
+    }
+
+    .stat .k {
+      font-size: 15px;
+      color: var(--mute);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .stat .v {
+      margin-top: 10px;
+      color: var(--gold-2);
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-shadow: 0 0 12px rgba(212,175,55,.35);
+      line-height: 1.1;
+    }
+
+    .stat .u {
+      margin-top: 8px;
+      font-size: 15px;
+      color: var(--ivory);
+      font-weight: 700;
+    }
+
+    .stat .h {
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--mute);
+      font-weight: 600;
+    }
+
+    .stat.hot .flag {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold-2);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      padding: 2px 8px;
+      margin-bottom: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+    }
+
+    th, td {
+      border: 1.5px solid rgba(212,175,55,.65);
+      text-align: center;
+    }
+
+    th {
+      color: var(--gold-2);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 9px 4px;
+      background: rgba(7,16,36,.45);
+    }
+
+    td {
+      font-size: 16px;
+      font-weight: 700;
+      padding: 12px 4px;
+      color: var(--ivory);
+    }
+
+    tr:last-child td {
+      color: var(--gold-2);
+      font-weight: 900;
+    }
+
+    .foot {
+      width: 100%;
+      margin-top: 18px;
+      padding-top: 6px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .foot-hl {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--gold-2);
+      letter-spacing: 1px;
+      text-shadow: 0 0 18px rgba(212,175,55,.5);
+      line-height: 1.25;
+    }
+
+    .period {
+      border: 1px solid var(--gold);
+      color: var(--gold-2);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 8px 14px;
+      background: rgba(7,16,36,.45);
+      white-space: nowrap;
+    }
+
+    .note { width: 100%; margin-top: 8px; font-size: 13px; color: #8e866f; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <article class="poster">
+    <div class="skyline"></div>
+    <div class="content">
+      <div class="hex">立Q人寿　智选高息</div>
+      <h1>智X储蓄保</h1>
+      <div class="sub">中长期财富保障　|　保证回报市场领先</div>
+      <div class="hairline"></div>
+      <div class="pills">
+        <span class="pill">回本快</span>
+        <span class="pill">收益高</span>
+      </div>
+
+      <section class="panel">
+        <div class="discount">
+          <div class="ttl">限时折扣</div>
+          <div class="copy">
+            限时享 <b>7%</b> 保费折扣
+            <small>整付保费 250,000 美元起　·　20 年保障期</small>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="k">第5年末保证年化收益率</div>
+            <div class="v">5.01%</div>
+            <div class="h">保证收益稳步回升，回本节奏更清晰</div>
+          </div>
+          <div class="stat">
+            <div class="k">整付保费</div>
+            <div class="v">250,000</div>
+            <div class="u">美元保费</div>
+            <div class="h">20 年保障期</div>
+          </div>
+          <div class="stat hot">
+            <div class="flag">折扣后</div>
+            <div class="k">实际投入金额</div>
+            <div class="v">232,500</div>
+            <div class="u">美元保费</div>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>年度</th>
+              <th>投入金额</th>
+              <th>保证收益</th>
+              <th>保证单利</th>
+              <th>保证复利</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>232,500</td><td>225,525</td><td>-3.00%</td><td>-3.00%</td></tr>
+            <tr><td>2</td><td>0</td><td>241,800</td><td>2.00%</td><td>1.98%</td></tr>
+            <tr><td>3</td><td>0</td><td>258,075</td><td>3.67%</td><td>3.54%</td></tr>
+            <tr><td>4</td><td>0</td><td>274,350</td><td>4.50%</td><td>4.23%</td></tr>
+            <tr><td>5</td><td>0</td><td>290,741</td><td>5.01%</td><td>4.57%</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <footer class="foot">
+        <div class="foot-hl">期满潜在收益高达 5.28%</div>
+        <div class="period">推广期 2026年7月1日-8月31日</div>
+      </footer>
+      <p class="note">保证收益与潜在收益不同，潜在收益并不保证。数据为方案示意，详情以计划书及核保结果为准。</p>
+    </div>
+  </article>
+</body>
+</html>
