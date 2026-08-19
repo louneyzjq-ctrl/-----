@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>友邦保险 · 保费回赠 + 预缴</title>
+  <style>
+    :root {
+      --navy: #071428;
+      --gold: #d4af37;
+      --gold-2: #f1d27a;
+      --ivory: #f6f1e4;
+      --mute: #c5bda8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { width: 1080px; background: var(--navy); }
+
+    .poster {
+      width: 1080px;
+      height: 1460px;
+      position: relative;
+      overflow: hidden;
+      font-family: "WenQuanYi Micro Hei", "Noto Sans SC", sans-serif;
+      color: var(--ivory);
+      background:
+        linear-gradient(180deg, rgba(7,20,40,.28) 0%, rgba(7,20,40,.58) 40%, rgba(7,20,40,.22) 100%),
+        url("./assets/navy-gold-glow.jpg") center top / cover no-repeat;
+    }
+
+    .skyline {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 188px;
+      background:
+        linear-gradient(180deg, rgba(7,20,40,.28) 0%, rgba(7,20,40,0) 20%, rgba(7,20,40,.5) 100%),
+        url("./assets/skyline-gold-trails.jpg") center bottom / cover no-repeat;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      padding: 28px 44px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 8px;
+      color: var(--gold-2);
+      margin-bottom: 8px;
+      text-shadow: 0 0 12px rgba(212,175,55,.35);
+    }
+
+    .hex {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 360px;
+      padding: 8px 28px;
+      color: var(--gold-2);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border: 1.5px solid var(--gold);
+      background: rgba(8,22,48,.45);
+      clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 16px 100%, 0 50%);
+      text-shadow: 0 0 12px rgba(212,175,55,.35);
+    }
+
+    h1 {
+      margin-top: 14px;
+      font-size: 56px;
+      font-weight: 900;
+      letter-spacing: 8px;
+      color: var(--gold-2);
+      line-height: 1;
+      text-shadow: 0 0 22px rgba(212,175,55,.45);
+    }
+
+    .sub {
+      margin-top: 12px;
+      font-size: 20px;
+      color: var(--mute);
+      letter-spacing: 2px;
+      font-weight: 500;
+    }
+
+    .hairline {
+      width: 520px;
+      height: 1px;
+      margin: 12px 0 14px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      box-shadow: 0 0 10px rgba(212,175,55,.45);
+    }
+
+    .pills {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--gold);
+      color: var(--gold-2);
+      font-size: 20px;
+      font-weight: 800;
+      padding: 6px 20px;
+      letter-spacing: 3px;
+    }
+
+    .case {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.15fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .case-item {
+      border: 1px solid rgba(212,175,55,.55);
+      background: rgba(7,16,36,.42);
+      padding: 10px 12px 9px;
+      text-align: center;
+    }
+
+    .case-item .k {
+      font-size: 14px;
+      color: var(--mute);
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .case-item .v {
+      margin-top: 4px;
+      color: var(--gold-2);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-shadow: 0 0 12px rgba(212,175,55,.35);
+      line-height: 1.15;
+    }
+
+    .case-item .u {
+      margin-top: 2px;
+      font-size: 13px;
+      color: var(--ivory);
+      font-weight: 600;
+    }
+
+    .case-item.hl {
+      border-color: var(--gold);
+      box-shadow: 0 0 16px rgba(212,175,55,.22);
+      background: linear-gradient(180deg, rgba(36,28,10,.45), rgba(7,16,36,.5));
+    }
+
+    .panel {
+      width: 100%;
+      border: 1.5px solid rgba(212,175,55,.85);
+      box-shadow: 0 0 0 1px rgba(241,210,122,.12) inset, 0 0 24px rgba(212,175,55,.12);
+      background: linear-gradient(180deg, rgba(10,26,54,.74), rgba(8,18,40,.54));
+      padding: 16px 18px 14px;
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .panel::before, .panel::after {
+      content: "";
+      position: absolute;
+      width: 14px; height: 14px;
+      border: 1.5px solid var(--gold);
+    }
+    .panel::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+    .panel::after { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }
+
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .sec-title {
+      color: var(--gold-2);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    .sec-amt {
+      color: var(--gold-2);
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-shadow: 0 0 12px rgba(212,175,55,.35);
+      white-space: nowrap;
+    }
+
+    .layers {
+      display: grid;
+      grid-template-columns: 1fr 22px 1fr 22px 1fr 28px 1.05fr;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .layer, .total-box {
+      border: 1px solid rgba(212,175,55,.45);
+      background: rgba(7,16,36,.38);
+      padding: 10px 10px 11px;
+      text-align: center;
+    }
+
+    .total-box {
+      border-color: var(--gold);
+      background: linear-gradient(180deg, rgba(48,36,10,.5), rgba(7,16,36,.42));
+    }
+
+    .plus {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-2);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .eq {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-2);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .pct {
+      color: var(--gold-2);
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1.1;
+      text-shadow: 0 0 10px rgba(212,175,55,.3);
+    }
+
+    .lab {
+      margin-top: 4px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--ivory);
+    }
+
+    .desc {
+      margin-top: 5px;
+      font-size: 13px;
+      color: var(--mute);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .tip {
+      margin-top: 10px;
+      font-size: 15px;
+      color: var(--ivory);
+      font-weight: 600;
+      line-height: 1.55;
+      border-top: 1px solid rgba(212,175,55,.28);
+      padding-top: 9px;
+    }
+
+    .tip b { color: var(--gold-2); }
+
+    .rates {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .rate {
+      border: 1px solid rgba(212,175,55,.45);
+      background: rgba(7,16,36,.38);
+      padding: 12px 14px 11px;
+      text-align: center;
+    }
+
+    .rate .k {
+      font-size: 15px;
+      color: var(--mute);
+      font-weight: 700;
+    }
+
+    .rate .v {
+      margin-top: 6px;
+      color: var(--gold-2);
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-shadow: 0 0 12px rgba(212,175,55,.35);
+    }
+
+    .calc {
+      margin-top: 10px;
+      text-align: center;
+      color: var(--ivory);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .calc b {
+      color: var(--gold-2);
+      font-size: 24px;
+    }
+
+    .foot {
+      width: 100%;
+      margin-top: auto;
+      padding-top: 4px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .foot-hl {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--gold-2);
+      letter-spacing: 1px;
+      text-shadow: 0 0 18px rgba(212,175,55,.5);
+      line-height: 1.3;
+    }
+
+    .period {
+      border: 1px solid var(--gold);
+      color: var(--gold-2);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 8px 12px;
+      background: rgba(7,16,36,.45);
+      white-space: nowrap;
+    }
+
+    .note {
+      width: 100%;
+      margin-top: 6px;
+      font-size: 12px;
+      color: #8e866f;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <article class="poster">
+    <div class="skyline"></div>
+    <div class="content">
+      <div class="brand">友邦保险</div>
+      <div class="hex">回赠最高 25%　预缴约 40.9%</div>
+      <h1>环宇盈活</h1>
+      <div class="sub">年缴 3 万美元　|　5 年累计 15 万美元</div>
+      <div class="hairline"></div>
+      <div class="pills">
+        <span class="pill">回本快</span>
+        <span class="pill">收益高</span>
+      </div>
+
+      <div class="case">
+        <div class="case-item">
+          <div class="k">年缴保费</div>
+          <div class="v">30,000</div>
+          <div class="u">美元 / 年</div>
+        </div>
+        <div class="case-item">
+          <div class="k">5 年累计总保费</div>
+          <div class="v">150,000</div>
+          <div class="u">美元</div>
+        </div>
+        <div class="case-item hl">
+          <div class="k">回赠 + 预缴合计空间</div>
+          <div class="v">19,770</div>
+          <div class="u">美元</div>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="sec-head">
+          <div class="sec-title">回赠部分</div>
+          <div class="sec-amt">直减 7,500 美元</div>
+        </div>
+        <div class="layers">
+          <div class="layer">
+            <div class="pct">19%</div>
+            <div class="lab">基础回赠</div>
+            <div class="desc">单独投保指定<br>储蓄计划即可享有</div>
+          </div>
+          <div class="plus">+</div>
+          <div class="layer">
+            <div class="pct">3%</div>
+            <div class="lab">搭配回赠</div>
+            <div class="desc">同时投保符合条件的<br>危疾 / 寿险计划</div>
+          </div>
+          <div class="plus">+</div>
+          <div class="layer">
+            <div class="pct">3%</div>
+            <div class="lab">限时回赠</div>
+            <div class="desc">活动期内投保<br>额外再享 3%</div>
+          </div>
+          <div class="eq">=</div>
+          <div class="total-box">
+            <div class="pct">25%</div>
+            <div class="lab">三层叠加</div>
+            <div class="desc">对应首年保费<br>3 万美金回赠</div>
+          </div>
+        </div>
+        <div class="tip">
+          小提示：想拿满 <b>25%</b>，需在活动期内同时搭一份危疾或寿险。
+          如果只做纯储蓄，基础 <b>19%</b> 也已是 <b>5,700 美元</b>，依然可观。
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="sec-head">
+          <div class="sec-title">预缴部分</div>
+          <div class="sec-amt">约首年保费 40.9%</div>
+        </div>
+        <div class="rates">
+          <div class="rate">
+            <div class="k">第 1 年预缴利率</div>
+            <div class="v">4.3%</div>
+          </div>
+          <div class="rate">
+            <div class="k">第 2–4 年　每年</div>
+            <div class="v">3.8%</div>
+          </div>
+        </div>
+        <div class="calc">
+          一次性预缴后续保费　·　四年累计约 <b>12,270</b> 美元优惠空间
+        </div>
+        <div class="tip" style="text-align:center; border-top: none; padding-top: 2px; margin-top: 6px;">
+          换算：首年保费 3 万美金 × 40.9% ≈ <b>12,270</b> 美元
+        </div>
+      </section>
+
+      <footer class="foot">
+        <div class="foot-hl">回赠 7,500 + 预缴 12,270<br>合计约 19,770 美元优惠空间</div>
+        <div class="period">推广期 2026年7月1日-8月31日</div>
+      </footer>
+      <p class="note">以年缴 30,000 美元、5 年缴为例。指定危疾为「爱伴航」保险计划2系列。回赠与预缴均为保费优惠，不等于保证收益率。预缴利率以公司公布为准。详情以计划书及核保结果为准。</p>
+    </div>
+  </article>
+</body>
+</html>
