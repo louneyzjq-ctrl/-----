@@ -3,10 +3,22 @@
 
 from __future__ import annotations
 
+import csv
+import html
+import os
+import shutil
+from pathlib import Path
+
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 
-OUTPUT = "/workspace/docs/武总方案-爱伴航保险计划2-5岁男-保障赔付一览.xlsx"
+OUTPUT_CN = "/workspace/docs/武总方案-爱伴航保险计划2-5岁男-保障赔付一览.xlsx"
+OUTPUT_EN = "/workspace/docs/AIA-OYS2-5yo-boy-25pay-coverage.xlsx"
+OUTPUT_ROOT = "/workspace/AIA-OYS2-coverage.xlsx"
+OUTPUT_HTML = "/workspace/docs/AIA-OYS2-coverage.html"
+OUTPUT_HTML_ROOT = "/workspace/AIA-OYS2-coverage.html"
+OUTPUT_CSV_DIR = "/workspace/docs/csv"
+ARTIFACT_DIR = "/opt/cursor/artifacts"
 
 NAVY = "1B365D"
 NAVY2 = "243B6B"
@@ -1227,6 +1239,158 @@ def sheet_not_included(wb: Workbook) -> None:
     ws.page_setup.fitToHeight = 0
 
 
+def sheet_matrix(ws) -> list[list[str]]:
+    merged_map: dict[tuple[int, int], str] = {}
+    for rng in ws.merged_cells.ranges:
+        min_row, min_col, max_row, max_col = rng.min_row, rng.min_col, rng.max_row, rng.max_col
+        value = ws.cell(min_row, min_col).value
+        text = "" if value is None else str(value)
+        for r in range(min_row, max_row + 1):
+            for c in range(min_col, max_col + 1):
+                merged_map[(r, c)] = text
+
+    max_row = ws.max_row or 1
+    max_col = ws.max_column or 1
+    rows: list[list[str]] = []
+    for r in range(1, max_row + 1):
+        row: list[str] = []
+        empty = True
+        for c in range(1, max_col + 1):
+            if (r, c) in merged_map:
+                val = merged_map[(r, c)]
+            else:
+                raw = ws.cell(r, c).value
+                val = "" if raw is None else str(raw)
+            if val.strip():
+                empty = False
+            row.append(val)
+        if not empty:
+            rows.append(row)
+    return rows
+
+
+def export_csv(wb: Workbook, csv_dir: str) -> list[str]:
+    Path(csv_dir).mkdir(parents=True, exist_ok=True)
+    ascii_names = {
+        "00-使用说明": "01-readme",
+        "01-保障结构": "02-structure",
+        "02-疾病赔付明细": "03-diseases",
+        "03-分类汇总": "04-summary",
+        "04-多重赔偿规则": "05-multiple-claims",
+        "05-其他保障": "06-other-benefits",
+        "06-本方案没有": "07-not-included",
+    }
+    written: list[str] = []
+    for i, ws in enumerate(wb.worksheets, 1):
+        stem = ascii_names.get(ws.title, f"{i:02d}-sheet")
+        path = os.path.join(csv_dir, f"{stem}.csv")
+        rows = sheet_matrix(ws)
+        with open(path, "w", encoding="utf-8-sig", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerows(rows)
+        written.append(path)
+    return written
+
+
+def export_html(wb: Workbook, path: str) -> None:
+    nav = []
+    sections = []
+    for i, ws in enumerate(wb.worksheets):
+        sid = f"sheet-{i}"
+        nav.append(f'<a href="#{sid}">{html.escape(ws.title)}</a>')
+        rows = sheet_matrix(ws)
+        if not rows:
+            continue
+        # first two rows are titles; find the first row that looks like a header (row 3 or 4 in original)
+        header_idx = 0
+        for idx, row in enumerate(rows):
+            joined = "".join(row)
+            if any(k in joined for k in ("序号", "层级", "分类", "类别", "规则类型", "项目", "工作表")):
+                header_idx = idx
+                break
+        intro_rows = rows[:header_idx]
+        table_rows = rows[header_idx:]
+        intro_html = "".join(f"<p class='intro'>{html.escape(r[0])}</p>" for r in intro_rows if r and r[0])
+        body = []
+        for ri, row in enumerate(table_rows):
+            tag = "th" if ri == 0 else "td"
+            tds = "".join(f"<{tag}>{html.escape(c)}</{tag}>" for c in row)
+            body.append(f"<tr>{tds}</tr>")
+        search = ""
+        if "明细" in ws.title:
+            search = '<input class="search" type="search" placeholder="在本表搜索疾病/赔付…" oninput="filterTable(this)">'
+        sections.append(
+            f'<section id="{sid}"><h2>{html.escape(ws.title)}</h2>{intro_html}{search}'
+            f'<div class="table-wrap"><table>{"".join(body)}</table></div></section>'
+        )
+
+    doc = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>武总方案 · 爱伴航保险计划2 · 保障赔付一览</title>
+<style>
+:root {{ --navy:#1B365D; --gold:#C9A227; --bg:#f6f3ec; --card:#fff; }}
+* {{ box-sizing:border-box; }}
+body {{ margin:0; font-family:"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:#1a1a1a; }}
+header {{ background:var(--navy); color:#fff; padding:20px 24px 12px; position:sticky; top:0; z-index:9; }}
+header h1 {{ margin:0 0 6px; font-size:20px; }}
+header p {{ margin:0 0 12px; color:#F5E6B8; font-size:13px; }}
+nav {{ display:flex; flex-wrap:wrap; gap:8px; }}
+nav a {{ color:#fff; text-decoration:none; background:#243B6B; padding:6px 10px; border-radius:6px; font-size:13px; }}
+nav a:hover {{ background:var(--gold); color:var(--navy); }}
+main {{ max-width:1400px; margin:0 auto; padding:16px; }}
+section {{ background:var(--card); margin:0 0 20px; padding:16px; border-radius:10px; box-shadow:0 1px 3px rgba(0,0,0,.06); }}
+h2 {{ margin:0 0 10px; color:var(--navy); font-size:18px; }}
+.intro {{ margin:0 0 8px; color:#444; font-size:13px; }}
+.search {{ width:100%; max-width:420px; margin:8px 0 12px; padding:8px 10px; border:1px solid #d0d5dd; border-radius:6px; }}
+.table-wrap {{ overflow:auto; max-height:70vh; border:1px solid #e5e7eb; border-radius:8px; }}
+table {{ border-collapse:collapse; width:100%; font-size:13px; }}
+th, td {{ border:1px solid #e5e7eb; padding:7px 8px; vertical-align:top; text-align:left; }}
+th {{ background:var(--navy); color:#fff; position:sticky; top:0; z-index:1; white-space:nowrap; }}
+tr:nth-child(even) td {{ background:#f8fafc; }}
+.tip {{ background:#fff7ed; border:1px solid #fed7aa; padding:10px 12px; border-radius:8px; margin:0 0 16px; font-size:13px; }}
+footer {{ text-align:center; color:#666; font-size:12px; padding:24px; }}
+</style>
+</head>
+<body>
+<header>
+  <h1>武总方案｜友邦「爱伴航」保险计划2｜保障与疾病赔付一览</h1>
+  <p>受保人：5岁男孩　缴费期：25年　产品：标准版（不是首护挚宝）　货币：美元</p>
+  <nav>{"".join(nav)}</nav>
+</header>
+<main>
+  <div class="tip">这是网页版，用浏览器就能打开，不需要 Excel。疾病定义以保单契约为准。计划书原件 PDF 未入库，本表只有赔付比例，没有保额/保费数字。</div>
+  {"".join(sections)}
+</main>
+<footer>整理自友邦官方产品简介，仅供理解保障结构，不是签单建议。</footer>
+<script>
+function filterTable(input) {{
+  const q = input.value.trim().toLowerCase();
+  const table = input.parentElement.querySelector('table');
+  if (!table) return;
+  for (const tr of table.querySelectorAll('tr')) {{
+    if (tr.querySelector('th')) continue;
+    tr.style.display = !q || tr.innerText.toLowerCase().includes(q) ? '' : 'none';
+  }}
+}}
+</script>
+</body>
+</html>
+"""
+    Path(path).write_text(doc, encoding="utf-8")
+
+
+def copy_outputs(paths: list[str]) -> None:
+    Path(ARTIFACT_DIR).mkdir(parents=True, exist_ok=True)
+    for src in paths:
+        if not os.path.isfile(src):
+            continue
+        name = os.path.basename(src)
+        shutil.copy2(src, os.path.join(ARTIFACT_DIR, name))
+
+
 def main() -> None:
     wb = Workbook()
     sheet_readme(wb)
@@ -1237,7 +1401,6 @@ def main() -> None:
     sheet_others(wb)
     sheet_not_included(wb)
 
-    # print settings for all
     for ws in wb.worksheets:
         ws.page_setup.paperSize = ws.PAPERSIZE_A4
         ws.page_setup.horizontalCentered = True
@@ -1246,8 +1409,17 @@ def main() -> None:
         ws.oddFooter.left.text = "整理自友邦官方产品简介，疾病定义以保单契约为准"
         ws.oddFooter.right.text = "第 &P 页 / 共 &N 页"
 
-    wb.save(OUTPUT)
-    print(OUTPUT)
+    Path("/workspace/docs").mkdir(parents=True, exist_ok=True)
+    for dest in (OUTPUT_CN, OUTPUT_EN, OUTPUT_ROOT):
+        wb.save(dest)
+        print(dest)
+
+    export_html(wb, OUTPUT_HTML)
+    shutil.copy2(OUTPUT_HTML, OUTPUT_HTML_ROOT)
+    csv_files = export_csv(wb, OUTPUT_CSV_DIR)
+    copy_outputs([OUTPUT_EN, OUTPUT_ROOT, OUTPUT_HTML, OUTPUT_HTML_ROOT, OUTPUT_CN, *csv_files])
+    print(OUTPUT_HTML)
+    print("csv", len(csv_files))
 
 
 if __name__ == "__main__":
